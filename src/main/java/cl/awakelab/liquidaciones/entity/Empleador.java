@@ -3,6 +3,8 @@ package cl.awakelab.liquidaciones.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "empleador")
@@ -33,13 +35,16 @@ public class Empleador {
     @Column
     private Long telefono;
 
-    @Column
-    private int usuario_id_usuario;
+    @ManyToOne
+    private Usuario usuario_id_usuario;
+
+    @ManyToMany
+    private List<Trabajador> trabajadores;
 
     public Empleador() {
     }
 
-    public Empleador(int id_empleador, int run, String nombre, String apellido_1, String apellido_2, String direccion, String email, Long telefono, int usuario_id_usuario) {
+    public Empleador(int id_empleador, int run, String nombre, String apellido_1, String apellido_2, String direccion, String email, Long telefono, Usuario usuario_id_usuario) {
         this.id_empleador = id_empleador;
         this.run = run;
         this.nombre = nombre;
@@ -115,11 +120,11 @@ public class Empleador {
         this.telefono = telefono;
     }
 
-    public int getUsuario_id_usuario() {
+    public Usuario getUsuario_id_usuario() {
         return usuario_id_usuario;
     }
 
-    public void setUsuario_id_usuario(int usuario_id_usuario) {
+    public void setUsuario_id_usuario(Usuario usuario_id_usuario) {
         this.usuario_id_usuario = usuario_id_usuario;
     }
 

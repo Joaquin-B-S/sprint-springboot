@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -32,6 +33,9 @@ public class Usuario {
 
     @ManyToOne
     private Perfil perfil_id_perfil;
+
+    @OneToMany(mappedBy = "usuario_id_usuario")
+    private List<Empleador> empleadores;
 
     public Usuario() {
     }

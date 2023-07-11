@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -14,7 +15,7 @@ public class Liquidacion {
     private Long id_liquidacion;
 
     @Column
-    private LocalDate periodo;
+    private LocalDateTime periodo;
 
     @Column
     private int sueldo_imponible;
@@ -38,19 +39,19 @@ public class Liquidacion {
     @Column
     private int anticipo;
 
-    @Column
-    private int trabajador_id_trabajador;
+    @ManyToOne
+    private Trabajador trabajador_id_trabajador;
 
-    @Column
-    private int institucion_previsional_id_inst_previsional;
+    @ManyToOne
+    private InstitucionPrevision institucion_previsional_id_inst_previsional;
 
-    @Column
-    private int institucion_salud_id_inst_salud;
+    @ManyToOne
+    private InstitucionSalud institucion_salud_id_inst_salud;
 
     public Liquidacion() {
     }
 
-    public Liquidacion(Long id_liquidacion, LocalDate periodo, int sueldo_imponible, int sueldo_liquido, int monto_inst_salud, int monto_inst_previsional, int total_descuento, int total_haberes, int anticipo, int trabajador_id_trabajador, int institucion_previsional_id_inst_previsional, int institucion_salud_id_inst_salud) {
+    public Liquidacion(Long id_liquidacion, LocalDateTime periodo, int sueldo_imponible, int sueldo_liquido, int monto_inst_salud, int monto_inst_previsional, int total_descuento, int total_haberes, int anticipo, Trabajador trabajador_id_trabajador, InstitucionPrevision institucion_previsional_id_inst_previsional, InstitucionSalud institucion_salud_id_inst_salud) {
         this.id_liquidacion = id_liquidacion;
         this.periodo = periodo;
         this.sueldo_imponible = sueldo_imponible;
@@ -73,11 +74,11 @@ public class Liquidacion {
         this.id_liquidacion = id_liquidacion;
     }
 
-    public LocalDate getPeriodo() {
+    public LocalDateTime getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(LocalDate periodo) {
+    public void setPeriodo(LocalDateTime periodo) {
         this.periodo = periodo;
     }
 
@@ -137,27 +138,27 @@ public class Liquidacion {
         this.anticipo = anticipo;
     }
 
-    public int getTrabajador_id_trabajador() {
+    public Trabajador getTrabajador_id_trabajador() {
         return trabajador_id_trabajador;
     }
 
-    public void setTrabajador_id_trabajador(int trabajador_id_trabajador) {
+    public void setTrabajador_id_trabajador(Trabajador trabajador_id_trabajador) {
         this.trabajador_id_trabajador = trabajador_id_trabajador;
     }
 
-    public int getInstitucion_previsional_id_inst_previsional() {
+    public InstitucionPrevision getInstitucion_previsional_id_inst_previsional() {
         return institucion_previsional_id_inst_previsional;
     }
 
-    public void setInstitucion_previsional_id_inst_previsional(int institucion_previsional_id_inst_previsional) {
+    public void setInstitucion_previsional_id_inst_previsional(InstitucionPrevision institucion_previsional_id_inst_previsional) {
         this.institucion_previsional_id_inst_previsional = institucion_previsional_id_inst_previsional;
     }
 
-    public int getInstitucion_salud_id_inst_salud() {
+    public InstitucionSalud getInstitucion_salud_id_inst_salud() {
         return institucion_salud_id_inst_salud;
     }
 
-    public void setInstitucion_salud_id_inst_salud(int institucion_salud_id_inst_salud) {
+    public void setInstitucion_salud_id_inst_salud(InstitucionSalud institucion_salud_id_inst_salud) {
         this.institucion_salud_id_inst_salud = institucion_salud_id_inst_salud;
     }
 

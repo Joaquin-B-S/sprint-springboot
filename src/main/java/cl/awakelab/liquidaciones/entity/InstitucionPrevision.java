@@ -3,6 +3,8 @@ package cl.awakelab.liquidaciones.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "institucion_prevision")
@@ -15,6 +17,12 @@ public class InstitucionPrevision {
     private String descripcion;
     @Column
     private float porc_desc;
+
+    @OneToMany(mappedBy = "institucion_prevision_id_inst_prevision")
+    private List<Trabajador> trabajadores;
+
+    @OneToMany(mappedBy = "institucion_previsional_id_inst_previsional")
+    private List<Liquidacion> liquidaciones;
 
     public InstitucionPrevision() {
     }

@@ -2,6 +2,9 @@ package cl.awakelab.liquidaciones.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "trabajador")
@@ -29,16 +32,18 @@ public class Trabajador {
     @Column
     private Long telefono;
 
-    @Column
-    private int institucion_prevision_id_inst_prevision;
+    @ManyToOne
+    private InstitucionPrevision institucion_prevision_id_inst_prevision;
 
-    @Column
-    private int institucion_salud_id_inst_salud;
+    @ManyToOne
+    private InstitucionSalud institucion_salud_id_inst_salud;
 
+    @OneToMany(mappedBy = "trabajador_id_trabajador")
+    private List<Liquidacion> liquidaciones;
     public Trabajador() {
     }
 
-    public Trabajador(int id_trabajador, int run, String nombre, String apellido_1, String apellido_2, String email, Long telefono, int institucion_prevision_id_inst_prevision, int institucion_salud_id_inst_salud) {
+    public Trabajador(int id_trabajador, int run, String nombre, String apellido_1, String apellido_2, String email, Long telefono, InstitucionPrevision institucion_prevision_id_inst_prevision, InstitucionSalud institucion_salud_id_inst_salud) {
         this.id_trabajador = id_trabajador;
         this.run = run;
         this.nombre = nombre;
@@ -106,19 +111,19 @@ public class Trabajador {
         this.telefono = telefono;
     }
 
-    public int getInstitucion_prevision_id_inst_prevision() {
+    public InstitucionPrevision getInstitucion_prevision_id_inst_prevision() {
         return institucion_prevision_id_inst_prevision;
     }
 
-    public void setInstitucion_prevision_id_inst_prevision(int institucion_prevision_id_inst_prevision) {
+    public void setInstitucion_prevision_id_inst_prevision(InstitucionPrevision institucion_prevision_id_inst_prevision) {
         this.institucion_prevision_id_inst_prevision = institucion_prevision_id_inst_prevision;
     }
 
-    public int getInstitucion_salud_id_inst_salud() {
+    public InstitucionSalud getInstitucion_salud_id_inst_salud() {
         return institucion_salud_id_inst_salud;
     }
 
-    public void setInstitucion_salud_id_inst_salud(int institucion_salud_id_inst_salud) {
+    public void setInstitucion_salud_id_inst_salud(InstitucionSalud institucion_salud_id_inst_salud) {
         this.institucion_salud_id_inst_salud = institucion_salud_id_inst_salud;
     }
 
