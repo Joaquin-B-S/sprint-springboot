@@ -1,86 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
     <head th:include="~{../static/html/head.html}"></head>
-<body>
-    <header th:include="~{../static/html/header.html}"></header>
-    <div class="container-fluid p-5 bg-light">
-            <h1>Liquidaciones de Sueldo <br> Para Trabajadores de Casa</h1>
-            <hr>
-            <p>Podrás crear liquidaciones de sueldo para tus trabajadores de casa particular y si eres contador podrás agregar a tus empleadores/clientes y manejar a sus trabajadores y liquidaciones.</p>
-            <a type="button" class="btn btn-secondary">Iniciar Sesión</a>
-            <a type="button" class="btn btn-dark">Registrarse</a>
-    </div>
-    <div class="container-fluid p-5">
-        <h2 class="text-center mb-5">Características</h2>
-        <div class="card-group m-auto" style="width: 80rem;">
-            <div class="card">
-                <img src="/images/download.jpg" class="card-img-top img-fluid" alt="imagen corporativa" >
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <body>
+        <header th:include="~{../static/html/header.html}"></header>
+        <div class="container-fluid p-5 bg-light">
+            <h1>
+                Liquidaciones de Sueldo <br />
+                Para Trabajadores de Casa
+            </h1>
+            <hr />
+            <p>
+                Podrás crear liquidaciones de sueldo para tus trabajadores de
+                casa particular y si eres contador podrás agregar a tus
+                empleadores/clientes y manejar a sus trabajadores y
+                liquidaciones.
+            </p>
+            <a type="button" class="btn btn-secondary" href="login.html"
+                >Iniciar Sesión</a
+            >
+            <a type="button" class="btn btn-dark" href="registro.html"
+                >Registrarse</a
+            >
+        </div>
+        <div class="container-fluid p-5">
+            <h2 class="text-center mb-5">Características</h2>
+            <div class="card-group m-auto" style="width: 80rem">
+                <div class="card">
+                    <img
+                        src="/images/download.jpg"
+                        class="card-img-top img-fluid"
+                        alt="imagen corporativa"
+                    />
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a
+                            natural lead-in to additional content. This content
+                            is a little bit longer.
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted"
+                                >Last updated 3 mins ago</small
+                            >
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="/images/download (1).jpg" class="card-img-top img-fluid" alt="imagen corporativa">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="card">
+                    <img
+                        src="/images/download (1).jpg"
+                        class="card-img-top img-fluid"
+                        alt="imagen corporativa"
+                    />
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This card has supporting text below as a natural
+                            lead-in to additional content.
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted"
+                                >Last updated 3 mins ago</small
+                            >
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="/images/images.jpg" class="card-img-top img-fluid" alt="imagen corporativa">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="card">
+                    <img
+                        src="/images/images.jpg"
+                        class="card-img-top img-fluid"
+                        alt="imagen corporativa"
+                    />
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a
+                            natural lead-in to additional content. This card has
+                            even longer content than the first to show that
+                            equal height action.
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted"
+                                >Last updated 3 mins ago</small
+                            >
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid mt-2 p-5">
-        <h2 class="text-center mb-5">Contacto</h2>
-        <div class="container d-flex gap-4">
-            <img src="/images/undraw-contact.svg" alt="imagen contacto" style="width: 30rem">
-            <form id="contactForm" data-sb-form-api-token="API_TOKEN" class="flex-grow-1">
+        <div class="container-fluid mt-2 p-5">
+            <h2 class="text-center mb-5">Contacto</h2>
+            <div class="container d-flex gap-4">
+                <img
+                    src="/images/undraw-contact.svg"
+                    alt="imagen contacto"
+                    style="width: 30rem"
+                />
+                <form
+                    id="contactForm"
+                    data-sb-form-api-token="API_TOKEN"
+                    class="flex-grow-1"
+                >
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Nombre</label>
+                        <input
+                            class="form-control"
+                            id="name"
+                            type="text"
+                            placeholder="Nombre"
+                            data-sb-validations="required"
+                        />
+                        <div
+                            class="invalid-feedback"
+                            data-sb-feedback="name:required"
+                        >
+                            Nombre es requerido.
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="name">Nombre</label>
-                    <input class="form-control" id="name" type="text" placeholder="Nombre" data-sb-validations="required" />
-                    <div class="invalid-feedback" data-sb-feedback="name:required">Nombre es requerido.</div>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="emailAddress"
+                            >Correo</label
+                        >
+                        <input
+                            class="form-control"
+                            id="emailAddress"
+                            type="email"
+                            placeholder="Email"
+                            data-sb-validations="required, email"
+                        />
+                        <div
+                            class="invalid-feedback"
+                            data-sb-feedback="emailAddress:required"
+                        >
+                            El correo es requerido.
+                        </div>
+                        <div
+                            class="invalid-feedback"
+                            data-sb-feedback="emailAddress:email"
+                        >
+                            El correo no es valido.
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="emailAddress">Correo</label>
-                    <input class="form-control" id="emailAddress" type="email" placeholder="Email" data-sb-validations="required, email" />
-                    <div class="invalid-feedback" data-sb-feedback="emailAddress:required">El correo es requerido.</div>
-                    <div class="invalid-feedback" data-sb-feedback="emailAddress:email">El correo no es valido.</div>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="message">Mensaje</label>
+                        <textarea
+                            class="form-control"
+                            id="message"
+                            type="text"
+                            placeholder="Mensaje"
+                            style="height: 10rem"
+                            data-sb-validations="required"
+                        ></textarea>
+                        <div
+                            class="invalid-feedback"
+                            data-sb-feedback="message:required"
+                        >
+                            Mensaje es obligatorio.
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="message">Mensaje</label>
-                    <textarea class="form-control" id="message" type="text" placeholder="Mensaje" style="height: 10rem;" data-sb-validations="required"></textarea>
-                    <div class="invalid-feedback" data-sb-feedback="message:required">Mensaje es obligatorio.</div>
-                </div>
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center mb-3">
+                            Formulario enviado con exito!
+                        </div>
+                    </div>
 
-                <div class="d-none" id="submitSuccessMessage">
-                    <div class="text-center mb-3">Formulario enviado con exito!</div>
-                </div>
+                    <div class="d-none" id="submitErrorMessage">
+                        <div class="text-center text-danger mb-3">
+                            Error al enviar el formulario!
+                        </div>
+                    </div>
 
-                <div class="d-none" id="submitErrorMessage">
-                    <div class="text-center text-danger mb-3">Error al enviar el formulario!</div>
-                </div>
-
-                <div class="d-grid">
-                    <button class="btn btn-secondary btn-lg disabled" id="submitButton" type="submit">Enviar</button>
-                </div>
-            </form>
+                    <div class="d-grid">
+                        <button
+                            class="btn btn-secondary btn-lg disabled"
+                            id="submitButton"
+                            type="submit"
+                        >
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <footer th:include="~{../static/html/footer.html}"></footer>
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-</body>
+        <footer th:include="~{../static/html/footer.html}"></footer>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
 </html>
