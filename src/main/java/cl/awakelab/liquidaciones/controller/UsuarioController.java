@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -14,6 +15,8 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     IUsuarioService objUsuarioService;
+
+    //Listar usuarios
     @GetMapping
     public String listarUsuarios(Model model){
         List<Usuario> listaUsuarios = objUsuarioService.listarUsuarios();
@@ -21,22 +24,30 @@ public class UsuarioController {
         return "listarUsuarios";
     }
 
-    @GetMapping("/{idUsuario}")
-    public String listarUsuarioPorId(@PathVariable int idUsuario, Model model){
-        Usuario usuario = objUsuarioService.buscarUsuarioPorId(idUsuario);
-        model.addAttribute("usuario", usuario);
-        return "usuario";
-    }
-
+    //Crear usuario
     @GetMapping("/crearUsuario")
     public String mostrarFormularioCrearUsuario(Model model){
-        return "crearUsuario";
+        return "formUsuario";
     }
 
-    @PostMapping("/crearUsario")
+    @PostMapping("/crearUsuario")
     public String crearUsuario(@ModelAttribute Usuario usuario){
+        usuario.setFechaCreacion(LocalDateTime.now());
         objUsuarioService.crearUsuario(usuario);
         return "redirect:/usuario";
+    }
+
+    //Registrar usuario sin inicio de sesion con el form registro
+    @GetMapping("/registrar")
+    public String mostrarFormularioRegistro(Model model){
+        return "registro";
+    }
+
+    @PostMapping("/registrar")
+    public String registrarUsuario(@ModelAttribute Usuario usuario){
+        usuario.setFechaCreacion(LocalDateTime.now());
+        objUsuarioService.registrarUsuario(usuario);
+        return "redirect:/login";
     }
 
     @GetMapping("/{idUsuario}/editar")
@@ -56,11 +67,17 @@ public class UsuarioController {
     public String mostrarEliminarUsuario(@PathVariable int idUsuario, Model model){
         Usuario usuarioEliminar = objUsuarioService.buscarUsuarioPorId(idUsuario);
         model.addAttribute("usuario", usuarioEliminar);
-        return "elimimarUsuario";
+        return "eliminarUsuario";
     }
 
-    public String eliminarUsuario(@PathVariable int idUsuario){
+
+    //Eliminar usuario
+    @PostMapping("/eliminar/{idUsuario}")
+    public String eliminarUsuarioPorId(@PathVariable int idUsuario) {
         objUsuarioService.eliminarUsuario2(idUsuario);
-        return "redirect: /usuario";
+        return "redirect:/usuario";
     }
+
+
+
 }

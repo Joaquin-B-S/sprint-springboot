@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head th:include="~{../static/html/head.html}">
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     </head>
@@ -12,7 +12,7 @@
                         <div class="border border-3 border-secondary"></div>
                         <div class="card bg-white shadow-lg">
                             <div class="card-body p-5">
-                                <form class="mb-3 mt-md-4">
+                                <form class="mb-3 mt-md-4" th:action="@{/usuario/registrar}" th:method="post" onsubmit="return confirmarRegistro()">
                                     <h2 class="fw-bold mb-2 text-uppercase">
                                         Registro Usuario
                                     </h2>
@@ -26,6 +26,7 @@
                                             id="run"
                                             placeholder="202590789"
                                             required
+                                            name="run"
                                         />
                                     </div>
                                     <div class="mb-3">
@@ -38,12 +39,32 @@
                                             id="nombre"
                                             placeholder="Joaquin"
                                             data-sb-validations="required"
+                                            name="nombre"
                                         />
                                         <div
                                             class="invalid-feedback"
                                             data-sb-feedback="name:required"
                                         >
                                             Nombre es requerido.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="apellido1" class="form-label"
+                                        >Primer apellido</label
+                                        >
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                id="apellido1"
+                                                placeholder="Baeza"
+                                                data-sb-validations="required"
+                                                name="apellido1"
+                                        />
+                                        <div
+                                                class="invalid-feedback"
+                                                data-sb-feedback="name:required"
+                                        >
+                                            Apellido es requerido.
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -56,6 +77,7 @@
                                             id="email"
                                             placeholder="correo@correo.com"
                                             required
+                                            name="email"
                                         />
                                     </div>
                                     <div class="mb-3">
@@ -68,6 +90,7 @@
                                             id="password"
                                             placeholder="*******"
                                             required
+                                            name="clave"
                                         />
                                     </div>
                                     <div
@@ -83,7 +106,8 @@
                                                 type="radio"
                                                 id="empleador"
                                                 required
-                                                name="tipoUsuario"
+                                                name="perfil.idPerfil"
+                                                th:value="2"
                                             />
                                         </div>
                                         <div>
@@ -96,7 +120,8 @@
                                                 type="radio"
                                                 id="contador"
                                                 required
-                                                name="tipoUsuario"
+                                                name="perfil.idPerfil"
+                                                th:value="3"
                                             />
                                         </div>
                                     </div>
@@ -119,6 +144,7 @@
                                         >
                                     </p>
                                 </div>
+                                <div id="mensajeRegistro" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
@@ -127,6 +153,22 @@
         </div>
 
         <footer th:include="~{../static/html/footer.html}"></footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script>
+            function confirmarRegistro() {
+                // Mostrar ventana de confirmación
+                if (confirm('¿Confirma que los datos del nuevo usuario han sido ingresados de forma correcta.?')) {
+                    // Mostrar el mensaje de registro exitoso
+                    var mensajeRegistro = document.getElementById('mensajeRegistro');
+                    mensajeRegistro = alert('Usuario registrado con éxito');
+                    mensajeRegistro.style.display = 'block';
+                    return true; // Permitir el envío del formulario
+                } else {
+                    return false; // Cancelar el envío del formulario
+                }
+            }
+
+        </script>
     </body>
 </html>

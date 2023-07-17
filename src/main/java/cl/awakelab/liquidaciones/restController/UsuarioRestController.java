@@ -1,20 +1,29 @@
-package cl.awakelab.liquidaciones.restcontroller;
+package cl.awakelab.liquidaciones.restController;
+
 import cl.awakelab.liquidaciones.entity.Usuario;
 import cl.awakelab.liquidaciones.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioRestController {
     @Autowired
     IUsuarioService objUsuarioService;
-    @PostMapping// tipo de request //enviar informacion
+    @PostMapping //tipo de request //enviar info
     public Usuario crearUsuario(@RequestBody Usuario usuario){
         return objUsuarioService.crearUsuario(usuario);
     }
-    @GetMapping("/{idUsuario}") //traer informacion
+
+    //Registrar usuario
+    @PostMapping("/registrar")
+    public Usuario registrarUsuario(@RequestBody Usuario usuario){
+        return objUsuarioService.registrarUsuario(usuario);
+    }
+
+    @GetMapping("/{idUsuario}") //traer info
     public Usuario buscarUsuarioPorId(@PathVariable int idUsuario){
         return objUsuarioService.buscarUsuarioPorId(idUsuario);
     }
@@ -26,10 +35,6 @@ public class UsuarioRestController {
     public Usuario actualizarUsuario(@RequestBody Usuario usuarioActualizar, @PathVariable int idUsuario){
         return objUsuarioService.actualizarUsuario(usuarioActualizar,idUsuario);
     }
-    @PutMapping //Actualizar
-    public Usuario actualizarUsuario2(@RequestBody Usuario usuarioActualizar){
-        return objUsuarioService.actualizarUsuario2(usuarioActualizar);
-    }
     @DeleteMapping //Eliminar
     public void eliminarUsuario(@RequestBody Usuario usuario){
         objUsuarioService.eliminarUsuario(usuario);
@@ -39,4 +44,6 @@ public class UsuarioRestController {
     public void eliminarUsuario2(@PathVariable int idUsuario){
         objUsuarioService.eliminarUsuario2(idUsuario);
     }
+
+
 }

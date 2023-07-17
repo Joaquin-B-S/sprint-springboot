@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head th:include="~{../static/html/head.html}"></head>
     <body>
         <header th:include="~{../static/html/header.html}"></header>
@@ -18,7 +18,7 @@
             <a type="button" class="btn btn-secondary" href="/login"
                 >Iniciar Sesión</a
             >
-            <a type="button" class="btn btn-dark" href="/registro"
+            <a type="button" class="btn btn-dark" href="/usuario/registrar"
                 >Registrarse</a
             >
         </div>

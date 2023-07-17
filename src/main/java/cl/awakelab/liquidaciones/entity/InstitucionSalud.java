@@ -1,4 +1,5 @@
 package cl.awakelab.liquidaciones.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,59 +10,19 @@ import java.util.List;
 @Table(name = "institucion_salud")
 public class InstitucionSalud {
     @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_inst_salud;
-    @Column
+    @Column(name = "id_inst_salud",nullable = false)
+    private int idInstSalud;
+
+    @Column(length = 100, nullable = false)
     private String descripcion;
-    @Column
-    private float porc_desc;
 
-    @OneToMany(mappedBy = "institucion_salud_id_inst_salud")
-    private List<Trabajador> trabajadores;
+    @Column(name = "porc_dcto",nullable = false)
+    private float porcDcto;
 
-    @OneToMany(mappedBy = "institucion_salud_id_inst_salud")
-    private List<Liquidacion> liquidaciones;
+    @OneToMany(mappedBy = "instSalud")
+    List<Trabajador> listaTrabajadores;
 
-    public InstitucionSalud() {
-    }
+    @OneToMany(mappedBy = "idInstSalud")
+    List<Liquidacion> liquidacionesSalud;
 
-    public InstitucionSalud(int id_inst_salud, String descripcion, float porc_desc) {
-        this.id_inst_salud = id_inst_salud;
-        this.descripcion = descripcion;
-        this.porc_desc = porc_desc;
-    }
-
-    public int getId_inst_salud() {
-        return id_inst_salud;
-    }
-
-    public void setId_inst_salud(int id_inst_salud) {
-        this.id_inst_salud = id_inst_salud;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public float getPorc_desc() {
-        return porc_desc;
-    }
-
-    public void setPorc_desc(float porc_desc) {
-        this.porc_desc = porc_desc;
-    }
-
-    @Override
-    public String toString() {
-        return "InstitucionSalud{" +
-                "id_inst_salud=" + id_inst_salud +
-                ", descripcion='" + descripcion + '\'' +
-                ", porc_desc=" + porc_desc +
-                '}';
-    }
 }

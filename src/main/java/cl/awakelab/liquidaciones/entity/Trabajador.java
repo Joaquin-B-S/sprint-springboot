@@ -9,136 +9,44 @@ import java.util.List;
 @Entity
 @Table(name = "trabajador")
 public class Trabajador {
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_trabajador;
 
-    @Column
+    @Id
+    @Column(name = "id_trabajador",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idTrabajador;
+
+    @Column(nullable = false, unique = true)
     private int run;
 
-    @Column
+    @Column(length = 100, nullable = false)
     private String nombre;
 
-    @Column
-    private String apellido_1;
+    @Column(name = "apellido_1",length = 100, nullable = false)
+    private String apellido1;
 
-    @Column
-    private String apellido_2;
+    @Column(name = "apellido_2",length = 100)
+    private String apellido2;
 
-    @Column
+    @Column(length = 100)
     private String email;
 
-    @Column
-    private Long telefono;
 
-    @ManyToOne
-    private InstitucionPrevision institucion_prevision_id_inst_prevision;
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_inst_prevision", nullable = false)
+    private InstitucionPrevisional instPrevision;
 
-    @ManyToOne
-    private InstitucionSalud institucion_salud_id_inst_salud;
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_inst_salud", nullable = false)
+    private InstitucionSalud instSalud;
 
-    @OneToMany(mappedBy = "trabajador_id_trabajador")
-    private List<Liquidacion> liquidaciones;
-    public Trabajador() {
-    }
+    @Column(nullable = false)
+    private long telefono;
 
-    public Trabajador(int id_trabajador, int run, String nombre, String apellido_1, String apellido_2, String email, Long telefono, InstitucionPrevision institucion_prevision_id_inst_prevision, InstitucionSalud institucion_salud_id_inst_salud) {
-        this.id_trabajador = id_trabajador;
-        this.run = run;
-        this.nombre = nombre;
-        this.apellido_1 = apellido_1;
-        this.apellido_2 = apellido_2;
-        this.email = email;
-        this.telefono = telefono;
-        this.institucion_prevision_id_inst_prevision = institucion_prevision_id_inst_prevision;
-        this.institucion_salud_id_inst_salud = institucion_salud_id_inst_salud;
-    }
+    @OneToMany
+    List<Liquidacion> listaTrabajadores;
 
-    public int getId_trabajador() {
-        return id_trabajador;
-    }
+    @ManyToMany(mappedBy = "trabajadores")
+    private List<Empleador> listaEmpleadores;
 
-    public void setId_trabajador(int id_trabajador) {
-        this.id_trabajador = id_trabajador;
-    }
 
-    public int getRun() {
-        return run;
-    }
-
-    public void setRun(int run) {
-        this.run = run;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido_1() {
-        return apellido_1;
-    }
-
-    public void setApellido_1(String apellido_1) {
-        this.apellido_1 = apellido_1;
-    }
-
-    public String getApellido_2() {
-        return apellido_2;
-    }
-
-    public void setApellido_2(String apellido_2) {
-        this.apellido_2 = apellido_2;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
-    }
-
-    public InstitucionPrevision getInstitucion_prevision_id_inst_prevision() {
-        return institucion_prevision_id_inst_prevision;
-    }
-
-    public void setInstitucion_prevision_id_inst_prevision(InstitucionPrevision institucion_prevision_id_inst_prevision) {
-        this.institucion_prevision_id_inst_prevision = institucion_prevision_id_inst_prevision;
-    }
-
-    public InstitucionSalud getInstitucion_salud_id_inst_salud() {
-        return institucion_salud_id_inst_salud;
-    }
-
-    public void setInstitucion_salud_id_inst_salud(InstitucionSalud institucion_salud_id_inst_salud) {
-        this.institucion_salud_id_inst_salud = institucion_salud_id_inst_salud;
-    }
-
-    @Override
-    public String toString() {
-        return "Trabajador{" +
-                "id_trabajador=" + id_trabajador +
-                ", run=" + run +
-                ", nombre='" + nombre + '\'' +
-                ", apellido_1='" + apellido_1 + '\'' +
-                ", apellido_2='" + apellido_2 + '\'' +
-                ", email='" + email + '\'' +
-                ", telefono=" + telefono +
-                ", institucion_prevision_id_inst_prevision=" + institucion_prevision_id_inst_prevision +
-                ", institucion_salud_id_inst_salud=" + institucion_salud_id_inst_salud +
-                '}';
-    }
 }

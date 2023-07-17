@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head th:include="~{../static/html/head.html}"></head>
     <body>
         <nav th:include="~{../static/html/navegacion.html}"></nav>
         <div class="container">
             <h2 class="text-center">Usuarios</h2>
             <div class="mb-3">
-                <a href="#" class="p-2 btn btn-dark">Agregar Usuario</a>
+                <button type="button" class="p-2 btn btn-dark">Agregar Usuario</button >
             </div>
             <table class="table table-hover">
                 <thead>
@@ -21,22 +21,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td>1</td>
-                        <td>122345671</td>
-                        <td>Jhon</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td>Administrador</td>
-                        <td>
-                            <a href="#" class="pe-auto">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <a href="#" class="pe-auto">
-                                <i class="bi bi-trash"></i>
-                            </a>
+                    <tr class="text-center" th:each="usuario: ${usuarios}">
+                        <td th:text="${usuario.idUsuario}"></td>
+                        <td th:text="${usuario.run}"></td>
+                        <td th:text="${usuario.nombre}"></td>
+                        <td th:text="${usuario.apellido1}"></td>
+                        <td th:text="${usuario.email}"></td>
+                        <td th:text="${usuario.perfil.descripcion}"></td>
+                        <td class="button-cell">
+                            <form th:action="@{/usuario/eliminar/{idUsuario}(idUsuario=${usuario.idUsuario})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
+                                <button type="submit" name="idUsuario" value="${usuario.idUsuario}" class="icon-button">
+                                    <i class="fas fa-trash black-icon me-3"></i>
+                                </button>
+                            </form>
+                            <form th:action="@{/usuario/eliminar/{idUsuario}(idUsuario=${usuario.idUsuario})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas modificar este usuario?')">
+                                <button type="submit" name="idUsuario" value="${usuario.idUsuario}" class="icon-button">
+                                    <i class="fas fa-edit black-icon"></i>
+                                </button>
+                            </form>
                         </td>
-                    </tr>
                     </tr>
                 </tbody>
             </table>

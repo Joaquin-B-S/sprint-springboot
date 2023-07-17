@@ -10,136 +10,40 @@ import java.util.List;
 @Table(name = "empleador")
 public class Empleador {
     @Id
-    @Column
+    @Column(name = "id_empleador",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_empleador;
+    private int idEmpleador;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private int run;
 
-    @Column
+    @Column(length = 100,nullable = false)
     private  String nombre;
 
-    @Column
-    private String apellido_1;
+    @Column(name = "apellido_1",length = 100, nullable = false)
+    private String apellido1;
 
-    @Column
-    private String apellido_2;
+    @Column(name = "apellido_2",length = 100)
+    private String apellido2;
 
-    @Column
+    @Column(length = 500)
     private String direccion;
 
-    @Column
+    @Column(length = 100)
     private String email;
 
+    //relacion con tabla usuario
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
     @Column
-    private Long telefono;
+    private long telefono;
 
-    @ManyToOne
-    private Usuario usuario_id_usuario;
-
+    //Relacion muchos a muchos de la tabla intermedia
     @ManyToMany
+    @JoinTable(name = "empl_trab", //especifica la tabla intermedia que se utilizará para almacenar la relación.
+            joinColumns = @JoinColumn(name = "id_empleador", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_trabajador", nullable = false))
     private List<Trabajador> trabajadores;
-
-    public Empleador() {
-    }
-
-    public Empleador(int id_empleador, int run, String nombre, String apellido_1, String apellido_2, String direccion, String email, Long telefono, Usuario usuario_id_usuario) {
-        this.id_empleador = id_empleador;
-        this.run = run;
-        this.nombre = nombre;
-        this.apellido_1 = apellido_1;
-        this.apellido_2 = apellido_2;
-        this.direccion = direccion;
-        this.email = email;
-        this.telefono = telefono;
-        this.usuario_id_usuario = usuario_id_usuario;
-    }
-
-    public int getId_empleador() {
-        return id_empleador;
-    }
-
-    public void setId_empleador(int id_empleador) {
-        this.id_empleador = id_empleador;
-    }
-
-    public int getRun() {
-        return run;
-    }
-
-    public void setRun(int run) {
-        this.run = run;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido_1() {
-        return apellido_1;
-    }
-
-    public void setApellido_1(String apellido_1) {
-        this.apellido_1 = apellido_1;
-    }
-
-    public String getApellido_2() {
-        return apellido_2;
-    }
-
-    public void setApellido_2(String apellido_2) {
-        this.apellido_2 = apellido_2;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
-    }
-
-    public Usuario getUsuario_id_usuario() {
-        return usuario_id_usuario;
-    }
-
-    public void setUsuario_id_usuario(Usuario usuario_id_usuario) {
-        this.usuario_id_usuario = usuario_id_usuario;
-    }
-
-    @Override
-    public String toString() {
-        return "Empleador{" +
-                "id_empleador=" + id_empleador +
-                ", run=" + run +
-                ", nombre='" + nombre + '\'' +
-                ", apellido_1='" + apellido_1 + '\'' +
-                ", apellido_2='" + apellido_2 + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", email='" + email + '\'' +
-                ", telefono=" + telefono +
-                ", usuario_id_usuario=" + usuario_id_usuario +
-                '}';
-    }
 }

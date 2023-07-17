@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{../static/html/head.html}"></head>
 <body>
     <header>
@@ -13,7 +13,7 @@
                         <div class="border border-3 border-secondary"></div>
                         <div class="card bg-white shadow-lg">
                             <div class="card-body p-5">
-                                <form class="mb-3 mt-md-4">
+                                <form class="mb-3 mt-md-4" th:action="@{/usuario/crearUsuario}" th:method="post">
                                     <h2 class="fw-bold mb-2 text-uppercase">
                                         Crear Usuario
                                     </h2>
@@ -27,6 +27,7 @@
                                                 id="run"
                                                 placeholder="202590789"
                                                 required
+                                                name="run"
                                         />
                                     </div>
                                     <div class="mb-3">
@@ -39,6 +40,7 @@
                                                 id="nombre"
                                                 placeholder="Joaquin"
                                                 data-sb-validations="required"
+                                                name="nombre"
                                         />
                                         <div
                                                 class="invalid-feedback"
@@ -49,7 +51,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="apellido1" class="form-label"
-                                        >Apellido 1</label
+                                        >Primer Apellido</label
                                         >
                                         <input
                                                 type="text"
@@ -57,6 +59,7 @@
                                                 id="apellido1"
                                                 placeholder="Baeza"
                                                 data-sb-validations="required"
+                                                name="apellido1"
                                         />
                                         <div
                                                 class="invalid-feedback"
@@ -67,21 +70,15 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="apellido2" class="form-label"
-                                        >Apellido 2</label
+                                        >Segundo apellido (opcional)</label
                                         >
                                         <input
                                                 type="text"
                                                 class="form-control"
                                                 id="apellido2"
                                                 placeholder="Sanhueza"
-                                                data-sb-validations="required"
+                                                name="apellido2"
                                         />
-                                        <div
-                                                class="invalid-feedback"
-                                                data-sb-feedback="name:required"
-                                        >
-                                            Apellido es requerido.
-                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="telefono" class="form-label"
@@ -93,6 +90,7 @@
                                                 id="telefono"
                                                 placeholder="990876544"
                                                 required
+                                                name="telefono"
                                         />
                                     </div>
                                     <div class="mb-3">
@@ -105,6 +103,8 @@
                                                 id="email"
                                                 placeholder="correo@correo.com"
                                                 required
+                                                name="email"
+
                                         />
                                     </div>
                                     <div class="mb-3">
@@ -117,6 +117,7 @@
                                                 id="password"
                                                 placeholder="*******"
                                                 required
+                                                name="clave"
                                         />
                                     </div>
                                     <div
@@ -132,7 +133,8 @@
                                                     type="radio"
                                                     id="empleador"
                                                     required
-                                                    name="tipoUsuario"
+                                                    name="perfil.idPerfil"
+                                                    th:value="2"
                                             />
                                         </div>
                                         <div>
@@ -145,7 +147,8 @@
                                                     type="radio"
                                                     id="contador"
                                                     required
-                                                    name="tipoUsuario"
+                                                    name="perfil.idPerfil"
+                                                    th:value="3"
                                             />
                                         </div>
                                     </div>
@@ -157,6 +160,13 @@
                                             Registrar
                                         </button>
                                     </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer th:include="~{../static/html/footer.html}"></footer>

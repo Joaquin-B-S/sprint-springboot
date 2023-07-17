@@ -1,7 +1,9 @@
 package cl.awakelab.liquidaciones.repository;
 
-import cl.awakelab.liquidaciones.entity.Usuario;
+import cl.awakelab.liquidaciones.entity.Empleador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-public interface IUsuarioRepository extends JpaRepository<Usuario,Integer> {
+
+@Repository
+public interface IEmpladorRepo extends JpaRepository<Empleador, Integer> {
 }
