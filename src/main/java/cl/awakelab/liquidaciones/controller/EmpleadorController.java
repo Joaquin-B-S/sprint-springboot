@@ -1,7 +1,9 @@
 package cl.awakelab.liquidaciones.controller;
 
 import cl.awakelab.liquidaciones.entity.Empleador;
+import cl.awakelab.liquidaciones.entity.Usuario;
 import cl.awakelab.liquidaciones.services.IEmpleadorService;
+import cl.awakelab.liquidaciones.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,9 @@ public class EmpleadorController {
     @Autowired
     IEmpleadorService objEmpleadorService;
 
+    @Autowired
+    IUsuarioService objUsuarioService;
+
     @GetMapping
     public String listarEmpleador(Model model){
         List<Empleador> listaEmpleadores = objEmpleadorService.listarEmpleadores();
@@ -24,6 +29,8 @@ public class EmpleadorController {
 
     @GetMapping("/crearEmpleador")
     public String mostrarFormularioCrearEmpleador(Model model){
+        List<Usuario> listaUsuarios = objUsuarioService.listarUsuarios();
+        model.addAttribute("usuarios", listaUsuarios);
         return "formEmpleador";
     }
 
@@ -53,6 +60,8 @@ public class EmpleadorController {
     @PostMapping("/editar/{idEmpleador}")
     public String mostrarFormularioEditarEmpleador(@PathVariable int idEmpleador, Model model) {
         model.addAttribute("empleador", objEmpleadorService.buscarEmpleadorPorId(idEmpleador));
+        List<Usuario> listaUsuarios = objUsuarioService.listarUsuarios();
+        model.addAttribute("usuarios", listaUsuarios);
         return "editarEmpleador";
     }
 

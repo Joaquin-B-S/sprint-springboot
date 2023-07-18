@@ -1,7 +1,6 @@
 package cl.awakelab.liquidaciones.services.serviceimpl;
 
 import cl.awakelab.liquidaciones.entity.Empleador;
-import cl.awakelab.liquidaciones.entity.Usuario;
 import cl.awakelab.liquidaciones.repository.IEmpladorRepo;
 import cl.awakelab.liquidaciones.services.IEmpleadorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +45,7 @@ public class EmpleadorImpl implements IEmpleadorService {
         empleador.setDireccion(empleadorActualizar.getDireccion());
         empleador.setEmail(empleadorActualizar.getEmail());
         empleador.setTelefono(empleadorActualizar.getTelefono());
+        empleador.setUsuario(empleadorActualizar.getUsuario());
         return objEmpleadorRepo.save(empleador);
     }
 
@@ -59,6 +59,7 @@ public class EmpleadorImpl implements IEmpleadorService {
         empleador.setDireccion(empleadorActualizar.getDireccion());
         empleador.setEmail(empleadorActualizar.getEmail());
         empleador.setTelefono(empleadorActualizar.getTelefono());
+        empleador.setUsuario(empleadorActualizar.getUsuario());
         return objEmpleadorRepo.save(empleador);
     }
 

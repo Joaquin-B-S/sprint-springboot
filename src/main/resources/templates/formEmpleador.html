@@ -118,6 +118,12 @@
                                                 name="email"
                                         />
                                     </div>
+                                    <div class="mb-3">
+                                        <label  class="form-label">Usuario</label>
+                                        <select  id="usuario" name="usuario" class="form-control">
+                                            <option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}" th:utext="${usuario.nombre}"/>
+                                        </select>
+                                    </div>
                                     <div class="d-grid">
                                         <button
                                                 class="btn btn-outline-dark"
