@@ -33,8 +33,8 @@ public class Empleador {
     private String email;
 
     //relacion con tabla usuario
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @Column
