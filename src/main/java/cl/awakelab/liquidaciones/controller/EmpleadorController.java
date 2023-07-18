@@ -33,16 +33,16 @@ public class EmpleadorController {
         return "redirect:/empleador";
     }
 
-    @GetMapping("/registrar")
-    public String mostrarFormularioRegistro(Model model){
-        return "registro";
-    }
-
-    @PostMapping("/registrar")
-    public String registrarEmpleador(@ModelAttribute Empleador empleador){
-        objEmpleadorService.registrarEmpleador(empleador);
-        return "redirect:/login";
-    }
+//    @GetMapping("/registrar")
+//    public String mostrarFormularioRegistro(Model model){
+//        return "registro";
+//    }
+//
+//    @PostMapping("/registrar")
+//    public String registrarEmpleador(@ModelAttribute Empleador empleador){
+//        objEmpleadorService.registrarEmpleador(empleador);
+//        return "redirect:/login";
+//    }
 
     @GetMapping("/{idEmpleador}")
     public String buscarEmpleadorPorId(@PathVariable int idEmpleador, Model model) {
