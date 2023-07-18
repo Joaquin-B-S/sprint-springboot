@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 
 @Service("usuarioImpl")
 public class UsuarioImpl implements IUsuarioService{
-    @Autowired //inyección de repositorio
+    @Autowired
     IUsuarioRepo objUsuarioRepo;
 
     @Override
@@ -19,7 +19,6 @@ public class UsuarioImpl implements IUsuarioService{
         return objUsuarioRepo.save(usuario);
     }
 
-    //Registrar usuario
     @Override
     public Usuario registrarUsuario(Usuario usuario) {
         return objUsuarioRepo.save(usuario);
@@ -62,6 +61,7 @@ public class UsuarioImpl implements IUsuarioService{
         usuario.setTelefono(usuarioActualizar.getTelefono());
         return objUsuarioRepo.save(usuario);
     }
+
     @Override
     public void eliminarUsuario(Usuario usuario) {
         objUsuarioRepo.delete(usuario);

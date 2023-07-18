@@ -16,7 +16,6 @@ public class UsuarioController {
     @Autowired
     IUsuarioService objUsuarioService;
 
-    //Listar usuarios
     @GetMapping
     public String listarUsuarios(Model model){
         List<Usuario> listaUsuarios = objUsuarioService.listarUsuarios();
@@ -24,7 +23,6 @@ public class UsuarioController {
         return "listarUsuarios";
     }
 
-    //Crear usuario
     @GetMapping("/crearUsuario")
     public String mostrarFormularioCrearUsuario(Model model){
         return "formUsuario";
@@ -37,7 +35,6 @@ public class UsuarioController {
         return "redirect:/usuario";
     }
 
-    //Registrar usuario sin inicio de sesion con el form registro
     @GetMapping("/registrar")
     public String mostrarFormularioRegistro(Model model){
         return "registro";
@@ -50,16 +47,22 @@ public class UsuarioController {
         return "redirect:/login";
     }
 
-    @GetMapping("/{idUsuario}/editar")
-    public String mostrarFormularioEditarUsuario(@PathVariable int idUsuario, Model model){
-        Usuario usuarioParaEditar = objUsuarioService.buscarUsuarioPorId(idUsuario);
-        model.addAttribute("usuario", usuarioParaEditar);
+    @GetMapping("/{idUsuario}")
+    public String buscarUsuarioPorId(@PathVariable int idUsuario, Model model) {
+        Usuario usuario = objUsuarioService.buscarUsuarioPorId(idUsuario);
+        model.addAttribute("usuario", usuario);
+        return "redirect:/usuario";
+    }
+    @PostMapping("/editar/{idUsuario}")
+    public String mostrarFormularioEditarUsuario(@PathVariable int idUsuario, Model model) {
+        model.addAttribute("usuario", objUsuarioService.buscarUsuarioPorId(idUsuario));
         return "editarUsuario";
     }
 
-    @PostMapping("/{idUsuario}/editar")
-    public String actualizarUsuario(@PathVariable int idUsuario, @ModelAttribute Usuario usuario){
-        objUsuarioService.actualizarUsuario2(usuario);
+    @PostMapping("/actualizar/{idUsuario}")
+    public String actualizarUsuario(@ModelAttribute Usuario usuario, @PathVariable int idUsuario) {
+        usuario.setFechaCreacion(LocalDateTime.now());
+        objUsuarioService.actualizarUsuario(usuario, idUsuario);
         return "redirect:/usuario";
     }
 
@@ -70,14 +73,9 @@ public class UsuarioController {
         return "eliminarUsuario";
     }
 
-
-    //Eliminar usuario
     @PostMapping("/eliminar/{idUsuario}")
     public String eliminarUsuarioPorId(@PathVariable int idUsuario) {
         objUsuarioService.eliminarUsuario2(idUsuario);
         return "redirect:/usuario";
     }
-
-
-
 }

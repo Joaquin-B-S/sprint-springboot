@@ -12,7 +12,7 @@ import java.util.List;
 public class UsuarioRestController {
     @Autowired
     IUsuarioService objUsuarioService;
-    @PostMapping //tipo de request //enviar info
+    @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario){
         return objUsuarioService.crearUsuario(usuario);
     }
@@ -23,7 +23,7 @@ public class UsuarioRestController {
         return objUsuarioService.registrarUsuario(usuario);
     }
 
-    @GetMapping("/{idUsuario}") //traer info
+    @GetMapping("/{idUsuario}")
     public Usuario buscarUsuarioPorId(@PathVariable int idUsuario){
         return objUsuarioService.buscarUsuarioPorId(idUsuario);
     }

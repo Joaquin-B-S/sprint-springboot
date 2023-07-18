@@ -40,9 +40,8 @@ public class Empleador {
     @Column
     private long telefono;
 
-    //Relacion muchos a muchos de la tabla intermedia
     @ManyToMany
-    @JoinTable(name = "empl_trab", //especifica la tabla intermedia que se utilizará para almacenar la relación.
+    @JoinTable(name = "empl_trab",
             joinColumns = @JoinColumn(name = "id_empleador", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "id_trabajador", nullable = false))
     private List<Trabajador> trabajadores;

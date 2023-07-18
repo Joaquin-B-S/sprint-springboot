@@ -4,9 +4,9 @@
     <body>
         <nav th:include="~{../static/html/navegacion.html}"></nav>
         <div class="container">
-            <h2 class="text-center">Usuarios</h2>
+            <h2 class="text-center my-5">Usuarios</h2>
             <div class="mb-3">
-                <button type="button" class="p-2 btn btn-dark">Agregar Usuario</button >
+                <a type="button" class="p-2 btn btn-dark" href="/usuario/crearUsuario">Agregar Usuario</a>
             </div>
             <table class="table table-hover">
                 <thead>
@@ -30,13 +30,13 @@
                         <td th:text="${usuario.perfil.descripcion}"></td>
                         <td class="button-cell">
                             <form th:action="@{/usuario/eliminar/{idUsuario}(idUsuario=${usuario.idUsuario})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
-                                <button type="submit" name="idUsuario" value="${usuario.idUsuario}" class="icon-button">
-                                    <i class="fas fa-trash black-icon me-3"></i>
+                                <button type="submit" name="idUsuario" value="${usuario.idUsuario}">
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             </form>
-                            <form th:action="@{/usuario/eliminar/{idUsuario}(idUsuario=${usuario.idUsuario})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas modificar este usuario?')">
-                                <button type="submit" name="idUsuario" value="${usuario.idUsuario}" class="icon-button">
-                                    <i class="fas fa-edit black-icon"></i>
+                            <form th:action="@{/usuario/editar/{idUsuario}(idUsuario=${usuario.idUsuario})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas modificar este usuario?')">
+                                <button type="submit" name="idUsuario" value="${usuario.idUsuario}">
+                                    <i class="bi bi-pencil-square"></i>
                                 </button>
                             </form>
                         </td>
