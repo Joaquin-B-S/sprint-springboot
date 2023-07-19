@@ -24,8 +24,6 @@ public class TrabajadorController {
 
     @GetMapping("/crearTrabajador")
     public String mostrarFormularioCrearTrabajador(Model model){
-        List<Trabajador> listaTrabajadores = objTrabajadorService.listarTrabajadores();
-        model.addAttribute("trabajadores", listaTrabajadores);
         return "formTrabajador";
     }
 
