@@ -129,7 +129,7 @@
                 <div class="mb-3">
                   <label class="form-label">Usuario</label>
                   <select  id="usuario" name="usuario" class="form-control">
-                    <option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}" th:utext="${usuario.nombre}" th:selected="${usuario.idUsuario == empleador.getUsuario()}"/>
+                    <option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}" th:utext="${usuario.nombre}" th:selected="${usuario.idUsuario == empleador.usuario.idUsuario}"/>
                   </select>
                 </div>
                 <div class="d-grid">
