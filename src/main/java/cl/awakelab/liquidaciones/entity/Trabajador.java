@@ -42,7 +42,7 @@ public class Trabajador {
     @Column(nullable = false)
     private long telefono;
 
-    @OneToMany
+    @OneToMany(mappedBy = "trabajador")
     List<Liquidacion> listaTrabajadores;
 
     @ManyToMany(mappedBy = "trabajadores")
