@@ -1,6 +1,10 @@
 package cl.awakelab.liquidaciones.controller;
 
+import cl.awakelab.liquidaciones.entity.InstitucionPrevisional;
+import cl.awakelab.liquidaciones.entity.InstitucionSalud;
 import cl.awakelab.liquidaciones.entity.Trabajador;
+import cl.awakelab.liquidaciones.services.IPrevisionService;
+import cl.awakelab.liquidaciones.services.ISaludService;
 import cl.awakelab.liquidaciones.services.ITrabajadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +18,10 @@ import java.util.List;
 public class TrabajadorController {
     @Autowired
     ITrabajadorService objTrabajadorService;
-
+    @Autowired
+    IPrevisionService objPrevisionService;
+    @Autowired
+    ISaludService objSaludService;
     @GetMapping
     public String listarTrabajadores(Model model){
         List<Trabajador> listaTrabajadores = objTrabajadorService.listarTrabajadores();
@@ -24,11 +31,20 @@ public class TrabajadorController {
 
     @GetMapping("/crearTrabajador")
     public String mostrarFormularioCrearTrabajador(Model model){
+        List<InstitucionPrevisional> prevision = objPrevisionService.listarPrevision();
+        List<InstitucionSalud> salud = objSaludService.listarSalud();
+        model.addAttribute("prevision", prevision);
+        model.addAttribute("salud", salud);
         return "formTrabajador";
     }
 
     @PostMapping("/crearTrabajador")
-    public String crearTrabajador(@ModelAttribute Trabajador trabajador){
+    public String crearTrabajador(@ModelAttribute Trabajador trabajador, @RequestParam("previsionId") int previsionId,
+    @RequestParam("saludId") int saludId){
+        InstitucionPrevisional prevision = objPrevisionService.buscarPrevisionPorId(previsionId);
+        InstitucionSalud salud = objSaludService.buscarSaludPorId(saludId);
+        trabajador.setInstPrevision(prevision);
+        trabajador.setInstSalud(salud);
         objTrabajadorService.crearTrabajador(trabajador);
         return "redirect:/trabajador";
     }
@@ -42,13 +58,21 @@ public class TrabajadorController {
     @PostMapping("/editar/{idTrabajador}")
     public String mostrarFormularioEditarTrabajador(@PathVariable int idTrabajador, Model model) {
         model.addAttribute("trabajador", objTrabajadorService.buscarTrabajadorPorId(idTrabajador));
-        List<Trabajador> listaTrabajadores = objTrabajadorService.listarTrabajadores();
-        model.addAttribute("trabajadores", listaTrabajadores);
+        List<InstitucionPrevisional> prevision = objPrevisionService.listarPrevision();
+        List<InstitucionSalud> salud = objSaludService.listarSalud();
+        model.addAttribute("prevision", prevision);
+        model.addAttribute("salud", salud);
         return "editarTrabajador";
     }
 
     @PostMapping("/actualizar/{idTrabajador}")
-    public String actualizarTrabajador(@ModelAttribute Trabajador trabajador, @PathVariable int idTrabajador) {
+    public String actualizarTrabajador(@ModelAttribute Trabajador trabajador, @PathVariable int idTrabajador,
+                                       @RequestParam("previsionId") int previsionId,
+                                       @RequestParam("saludId") int saludId) {
+        InstitucionPrevisional prevision = objPrevisionService.buscarPrevisionPorId(previsionId);
+        InstitucionSalud salud = objSaludService.buscarSaludPorId(saludId);
+        trabajador.setInstPrevision(prevision);
+        trabajador.setInstSalud(salud);
         objTrabajadorService.actualizarTrabajador(trabajador, idTrabajador);
         return "redirect:/trabajador";
     }
