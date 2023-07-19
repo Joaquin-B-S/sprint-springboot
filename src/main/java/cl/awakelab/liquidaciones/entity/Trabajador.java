@@ -30,7 +30,6 @@ public class Trabajador {
     @Column(length = 100)
     private String email;
 
-
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(name = "id_inst_prevision", nullable = false)
     private InstitucionPrevisional instPrevision;
@@ -43,7 +42,7 @@ public class Trabajador {
     private long telefono;
 
     @OneToMany(mappedBy = "trabajador")
-    List<Liquidacion> listaTrabajadores;
+    List<Liquidacion> listaLiquidacion;
 
     @ManyToMany(mappedBy = "trabajadores")
     private List<Empleador> listaEmpleadores;

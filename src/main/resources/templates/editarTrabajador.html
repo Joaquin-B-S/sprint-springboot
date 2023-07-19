@@ -99,20 +99,6 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="direccion" class="form-label"
-                  >Dirección</label
-                  >
-                  <input
-                          type="text"
-                          class="form-control"
-                          id="direccion"
-                          placeholder="calle 123"
-                          required
-                          name="direccion"
-                          th:value="${trabajador.getDireccion()}"
-                  />
-                </div>
-                <div class="mb-3">
                   <label for="email" class="form-label"
                   >Email</label
                   >
@@ -127,9 +113,23 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Usuario</label>
-                  <select  id="usuario" name="usuario" class="form-control">
-                    <option th:each="usuario : ${usuarios}" th:value="${usuario.idUsuario}" th:utext="${usuario.nombre}" th:selected="${usuario.idUsuario == empleador.usuario.idUsuario}"/>
+                  <label for="previsionId" class="form-label">AFP</label>
+                  <select class="form-control" id="previsionId" name="previsionId">
+                    <option th:each="prevision : ${prevision}"
+                            th:value="${prevision.idInstPrevision}"
+                            th:text="${prevision.descripcion}"
+                            th:selected="${prevision.idInstPrevision == trabajador.instPrevision.idInstPrevision}">
+                    </option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="saludId" class="form-label">Institución de Salud</label>
+                  <select class="form-control" id="saludId" name="saludId">
+                    <option th:each="salud: ${salud}"
+                            th:value="${salud.idInstSalud}"
+                            th:text="${salud.descripcion}"
+                            th:selected="${salud.idInstSalud == trabajador.instSalud.idInstSalud}" >
+                    </option>
                   </select>
                 </div>
                 <div class="d-grid">
