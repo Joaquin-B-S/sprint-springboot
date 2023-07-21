@@ -32,7 +32,6 @@ public class Empleador {
     @Column(length = 100)
     private String email;
 
-    //relacion con tabla usuario
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
@@ -40,9 +39,6 @@ public class Empleador {
     @Column
     private long telefono;
 
-    @ManyToMany
-    @JoinTable(name = "empl_trab",
-            joinColumns = @JoinColumn(name = "id_empleador", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "id_trabajador", nullable = false))
+    @ManyToMany(mappedBy = "listaEmpleadores")
     private List<Trabajador> trabajadores;
 }

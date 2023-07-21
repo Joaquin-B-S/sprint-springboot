@@ -1,8 +1,10 @@
 package cl.awakelab.liquidaciones.controller;
 
+import cl.awakelab.liquidaciones.entity.Empleador;
 import cl.awakelab.liquidaciones.entity.InstitucionPrevisional;
 import cl.awakelab.liquidaciones.entity.InstitucionSalud;
 import cl.awakelab.liquidaciones.entity.Trabajador;
+import cl.awakelab.liquidaciones.services.IEmpleadorService;
 import cl.awakelab.liquidaciones.services.IPrevisionService;
 import cl.awakelab.liquidaciones.services.ISaludService;
 import cl.awakelab.liquidaciones.services.ITrabajadorService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ import java.util.List;
 public class TrabajadorController {
     @Autowired
     ITrabajadorService objTrabajadorService;
+    @Autowired
+    IEmpleadorService objEmpleadorService;
     @Autowired
     IPrevisionService objPrevisionService;
     @Autowired
@@ -32,19 +37,25 @@ public class TrabajadorController {
     @GetMapping("/crearTrabajador")
     public String mostrarFormularioCrearTrabajador(Model model){
         List<InstitucionPrevisional> prevision = objPrevisionService.listarPrevision();
+        List<Empleador> empleador = objEmpleadorService.listarEmpleadores();
         List<InstitucionSalud> salud = objSaludService.listarSalud();
         model.addAttribute("prevision", prevision);
+        model.addAttribute("empleador", empleador);
         model.addAttribute("salud", salud);
         return "formTrabajador";
     }
 
     @PostMapping("/crearTrabajador")
-    public String crearTrabajador(@ModelAttribute Trabajador trabajador, @RequestParam("previsionId") int previsionId,
+    public String crearTrabajador(@ModelAttribute Trabajador trabajador, @RequestParam("empleadorId") int empleadorId, @RequestParam("previsionId") int previsionId,
     @RequestParam("saludId") int saludId){
+        Empleador empleador = objEmpleadorService.buscarEmpleadorPorId(empleadorId);
         InstitucionPrevisional prevision = objPrevisionService.buscarPrevisionPorId(previsionId);
         InstitucionSalud salud = objSaludService.buscarSaludPorId(saludId);
         trabajador.setInstPrevision(prevision);
         trabajador.setInstSalud(salud);
+        List<Empleador> listaEmpleadores = new ArrayList<>();
+        listaEmpleadores.add(empleador);
+        trabajador.setListaEmpleadores(listaEmpleadores);
         objTrabajadorService.crearTrabajador(trabajador);
         return "redirect:/trabajador";
     }

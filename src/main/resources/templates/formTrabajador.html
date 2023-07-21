@@ -107,15 +107,21 @@
                                         />
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">AFP</label>
+                                        <label class="form-label" for="previsionId">AFP</label>
                                         <select  id="previsionId" name="previsionId" class="form-control">
                                             <option th:each="prevision : ${prevision}" th:value="${prevision.idInstPrevision}" th:utext="${prevision.descripcion}"/>
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Institución de Salud</label>
+                                        <label class="form-label" for="saludId">Institución de Salud</label>
                                         <select  id="saludId" name="saludId" class="form-control">
                                             <option th:each="salud : ${salud}" th:value="${salud.idInstSalud}" th:utext="${salud.descripcion}"/>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="empleadorId" class="form-label">Empleador</label>
+                                        <select id="empleadorId" class="form-control" name="empleadorId">
+                                            <option th:each="empleador: ${empleador}" th:value="${empleador.idEmpleador}" th:text="${empleador.nombre + ' ' + empleador.apellido1}"></option>
                                         </select>
                                     </div>
                                     <div class="d-grid">
