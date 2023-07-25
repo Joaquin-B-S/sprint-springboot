@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{../static/html/head.html}"></head>
+<body>
+    <header class="mb-5">
+        <nav th:include="~{../static/html/navegacion.html}"></nav>
+    </header>
+    <main>
+        <div class="vh-100 d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="border border-3 border-secondary"></div>
+                        <div class="card bg-white shadow-lg">
+                            <div class="card-body p-5">
+                                <form class="mb-3 mt-md-4" th:action="@{/liquidacion/crearLiquidacion}" th:method="post">
+                                    <h2 class="fw-bold mb-2 text-uppercase">
+                                        Crear Liquidación
+                                    </h2>
+                                    <div class="mb-3">
+                                        <label for="trabajadorId" class="form-label">Trabajador</label>
+                                        <select id="trabajadorId" class="form-control" name="trabajadorId">
+                                            <option th:each="trabajador: ${trabajador}" th:value="${trabajador.idTrabajador}" th:text="${trabajador.nombre + ' ' + trabajador.apellido1}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="sueldoImponible" class="form-label"
+                                        >Sueldo imponible</label
+                                        >
+                                        <input
+                                                type="number"
+                                                class="form-control"
+                                                id="sueldoImponible"
+                                                placeholder="750000"
+                                                required
+                                                name="sueldoImponible"
+                                        />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="saludId">Institución de Salud</label>
+                                        <select  id="saludId" name="saludId" class="form-control">
+                                            <option th:each="salud : ${salud}" th:value="${salud.idInstSalud}" th:utext="${salud.descripcion}"/>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="montoSalud" class="form-label"
+                                        >Monto Salud</label
+                                        >
+                                        <input
+                                                type="number"
+                                                class="form-control"
+                                                id="montoSalud"
+                                                placeholder="40000"
+                                                name="montoSalud"
+                                                required
+                                        />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="previsionId">AFP</label>
+                                        <select  id="previsionId" name="previsionId" class="form-control">
+                                            <option th:each="prevision : ${prevision}" th:value="${prevision.idInstPrevision}" th:utext="${prevision.descripcion}"/>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="montoAfp" class="form-label"
+                                        >Monto AFP</label
+                                        >
+                                        <input
+                                                type="number"
+                                                class="form-control"
+                                                id="montoAfp"
+                                                placeholder="35000"
+                                                required
+                                                name="montoAfp"
+                                        />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="totalDscts" class="form-label">Total Descuentos</label>
+                                        <input id="totalDscts" class="form-control" type="text"  name="totalDscts" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="totalHaberes" class="form-label">Total Haberes</label>
+                                        <input id="totalHaberes" class="form-control" type="text"  name="totalHaber" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="anticipo" class="form-label">Anticipo</label>
+                                        <input type="number" class="form-control" id="anticipo" name="anticipo"
+                                               placeholder="Ingrese anticipo" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="sueldoLiquido" class="form-label">Sueldo Liquido</label>
+                                        <input id="sueldoLiquido" class="form-control" type="text"  required>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button
+                                                class="btn btn-outline-dark"
+                                                type="submit"
+                                        >
+                                            Registrar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:include="~{../static/html/footer.html}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>

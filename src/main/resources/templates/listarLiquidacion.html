@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{../static/html/head.html}"></head>
+<body>
+<nav th:include="~{../static/html/navegacion.html}"></nav>
+<div class="container">
+    <h2 class="text-center my-5">Liquidaciones</h2>
+    <div class="mb-3">
+        <a type="button" class="p-2 btn btn-dark" href="/liquidacion/crearLiquidacion">Agregar Liquidacion</a>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr class="text-center">
+            <th>ID</th>
+            <th>ID Trabajador</th>
+            <th>Nombre Trabajador</th>
+            <th>Sueldo Imponible</th>
+            <th>Sueldo líquido</th>
+            <th>Acción</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="liquidacion: ${liquidaciones}">
+            <td th:text="${liquidacion.idLiquidacion}"></td>
+            <td th:text="${liquidacion.idTrabajador}"></td>
+            <td th:text="${liquidacion.nombreTrabajador}"></td>
+            <td th:text="${liquidacion.sueldoImponible}"></td>
+            <td th:text="${liquidacion.sueldoLiquido}"></td>
+            <td class="button-cell">
+                <form th:action="@{/liquidacion/eliminar/{idLiquidacion}(idLiquidacion=${liquidacion.idLiquidacion})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta liquidacion?')">
+                    <button type="submit" name="idLiquidacion" value="${liquidacion.idLiquidacion}">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+                <form th:action="@{/liquidacion/editar/{idLiquidacion}(idLiquidacion=${liquidacion.idLiquidacion})}" th:method="post" onsubmit="return confirm('¿Estás seguro de que deseas modificar este liquidacion?')">
+                    <button type="submit" name="idLiquidacion" value="${trabajador.idLiquidacion}">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:include="~{../static/html/footer.html}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>

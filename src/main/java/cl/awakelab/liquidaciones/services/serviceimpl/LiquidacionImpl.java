@@ -22,25 +22,6 @@ public class LiquidacionImpl implements ILiquidacionService {
 
     @Override
     public Liquidacion crearLiquidacion(Liquidacion liquidacion) {
-        int sueldoImponible = liquidacion.getSueldoImponible();
-        InstitucionPrevisional afpTrabajador = liquidacion.getIdInstPrevisional();
-        double porcentajeAFP = afpTrabajador.getPorcDcto();
-        int montoAFP = (int) (sueldoImponible * (porcentajeAFP / 100.0));
-        InstitucionSalud saludTrabajador = liquidacion.getIdInstSalud();
-        double porcentajeSalud = saludTrabajador.getPorcDcto();
-        int montoSalud = (int) (sueldoImponible * (porcentajeSalud / 100.0));
-        int totalDescuento = montoAFP + montoSalud;
-        int anticipo = liquidacion.getAnticipo();
-        int totalHaberes = sueldoImponible;
-        int sueldoLiquido = totalHaberes - totalDescuento - anticipo;
-
-        liquidacion.setMontoInstSalud(montoSalud);
-        liquidacion.setMontoInstPrevisional(montoAFP);
-        liquidacion.setTotalDescuento(totalDescuento);
-        liquidacion.setTotalHaberes(totalHaberes);
-        liquidacion.setAnticipo(anticipo);
-        liquidacion.setSueldoLiquido(sueldoLiquido);
-
         return objLiquidacionRepo.save(liquidacion);
     }
 
